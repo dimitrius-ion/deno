@@ -3,8 +3,10 @@ import {
   isWebSocketCloseEvent
 } from 'https://deno.land/std/ws/mod.ts'
 import { v4 } from 'https://deno.land/std/uuid/mod.ts'
+import { camelCase } from './deps.ts'
 
 const users = new Map<string, WebSocket>()
+const message = camelCase(typeof event === 'string' ? event : '')
 
 function broadcast(message: string, senderId?: string): void {
   if (!message) return
